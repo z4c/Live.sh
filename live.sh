@@ -10,7 +10,7 @@
 TIME_FORMAT='%F %H:%M'
 OUTPUT_FORMAT='%T Event(s): %e fired for file: %w. Refreshing.'
 
-while inotifywait -q -r --timefmt "${TIME_FORMAT}" --format "${OUTPUT_FORMAT}" "$@"; do
+while inotifywait -q -r -e modify --timefmt "${TIME_FORMAT}" --format "${OUTPUT_FORMAT}" "$@"; do
     CHROME_WINDOW=`xdotool search --onlyvisible --class chromium-browser | head -1`
     ACTIVE_WINDOW=`xdotool getactivewindow`
     xdotool windowactivate $CHROME_WINDOW key 'CTRL+r'
